@@ -3,170 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYR Scripts | Farming and Friends</title>
+    <title>TYR Scripts | Hub</title>
     <style>
         :root {
-            --bg-color: #0d0202;
-            --container-bg: #1a0808;
-            --accent-color: #ff3333;
-            --text-color: #ffffff;
-            --text-muted: #e0a3a3;
-            --button-hover: #cc0000;
-            --border-color: #3d1414;
+            --bg-main: #0a0505;
+            --bg-card: #140a0a;
+            --bg-sidebar: #0f0707;
+            --accent-red: #ff2222;
+            --accent-hover: #cc1111;
+            --text-main: #ffffff;
+            --text-muted: #a89292;
+            --border-red: #2d1212;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            background-image: radial-gradient(circle, #2a0808 0%, #0d0202 100%);
+            overflow-x: hidden;
         }
 
-        .container {
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-red);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 30px 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.15);
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .logo span {
+            color: var(--accent-red);
+            text-shadow: 0 0 10px rgba(255, 34, 34, 0.4);
         }
 
-        h1 span {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .subtitle {
+        .nav-links a {
             color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .script-box {
-            background-color: #090202;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        code {
-            display: block;
-            white-space: pre-wrap;
-            word-break: break-all;
-            color: var(--accent-color);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            text-align: left;
-            margin-bottom: 15px;
-            text-shadow: 0 0 5px rgba(255, 51, 51, 0.3);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
-            width: 100%;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: block;
+            border-left: 3px solid transparent;
         }
 
-        .btn-copy {
-            background-color: var(--accent-color);
-            color: #ffffff;
-            box-shadow: 0 4px 14px rgba(255, 51, 51, 0.4);
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+            background-color: rgba(255, 34, 34, 0.08);
+            border-left-color: var(--accent-red);
         }
 
-        .btn-copy:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.6);
+        .sidebar-footer {
+            margin-top: auto;
         }
 
         .btn-discord {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: #5865F2;
             color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
 
         .btn-discord:hover {
             background-color: #4752C4;
-            transform: translateY(-2px);
         }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 0.85rem;
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 260px;
+            padding: 40px 60px;
+            width: calc(100% - 260px);
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #2a0a0a 0%, #140505 100%);
+            border: 1px solid var(--border-red);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-banner h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header-banner h2 span {
+            color: var(--accent-red);
+        }
+
+        .header-banner p {
             color: var(--text-muted);
-            opacity: 0.7;
+            max-width: 500px;
+            font-size: 1.1rem;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        section h3 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-red);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* GRID FOR CARDS */
+        .script-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-red);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-red);
+            box-shadow: 0 5px 20px rgba(255, 34, 34, 0.1);
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn-copy {
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* --- FEATURES / INFO PANEL --- */
+        .info-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-red);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .info-panel ol {
+            margin-left: 20px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-red); }
+            .main-content { margin-left: 0; width: 100%; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>TYR <span>Scripts</span></h1>
-        <p class="subtitle">Roblox Farming and Friends Script</p>
-
-        <div class="script-box">
-            <code id="scriptText">loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua"))()</code>
-            <button class="btn btn-copy" onclick="copyScript()">Copy Script</button>
+    <nav class="sidebar">
+        <div class="logo">TYR <span>Scripts</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active" onclick="setActive(this)">Home</a></li>
+            <li><a href="#farming" onclick="setActive(this)">Farming Games</a></li>
+            <li><a href="#other" onclick="setActive(this)">Other Scripts</a></li>
+            <li><a href="#how-to" onclick="setActive(this)">How to Use</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="https://discord.gg/tyrscripts" target="_blank" class="btn-discord">Join Discord</a>
         </div>
+    </nav>
 
-        <a href="https://discord.gg/tyrscripts" target="_blank" class="btn btn-discord">
-            Join Our Discord
-        </a>
+    <main class="main-content">
+        
+        <header id="home" class="header-banner">
+            <h2>Welcome to <span>TYR Hub</span></h2>
+            <p>The ultimate destination for optimized, safe, and powerful Roblox scripts. Click the buttons below to copy scripts instantly.</p>
+        </header>
 
-        <div class="footer">
-            &copy; 2026 TYR Scripts. All rights reserved.
-        </div>
-    </div>
+        <section id="farming">
+            <h3>Farming Games</h3>
+            <div class="script-grid">
+                
+                <div class="card">
+                    <div>
+                        <h4>Farming and Friends</h4>
+                        <p>Auto-farm, fast harvest, speed-up machines, and infinite item management features.</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard(this, 'loadstring(game:HttpGet(\'https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua\'))()')">Copy Script</button>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Bee Swarm Simulator</h4>
+                        <p>Auto-dig, auto-quest completion, and advanced token collection filters.</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard(this, '-- Bee Swarm Script coming soon in Discord! --')">Get From Discord</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="other">
+            <h3>Other Scripts</h3>
+            <div class="script-grid">
+                
+                <div class="card">
+                    <div>
+                        <h4>Universal ESP & Aimbot</h4>
+                        <p>Works on almost any shooter game. Custom crosshair, hitbox expander, and wallhacks.</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard(this, '-- Universal Script Locked. Check Discord --')">Locked</button>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h4>Pet Simulator 99</h4>
+                        <p>Automatic area unlocking, auto-clicker, and instant coin magnet built-in.</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard(this, '-- PS99 Script coming soon! --')">Soon</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="how-to">
+            <h3>How to Use</h3>
+            <div class="info-panel">
+                <ol>
+                    <li>Click the <strong>"Copy Script"</strong> button on any script card above.</li>
+                    <li>Open your preferred Roblox Executor (e.g., Wave, Synapse, Electron, Solara).</li>
+                    <li>Paste (<kbd>Ctrl</kbd> + <kbd>V</kbd>) the script into the executor code box.</li>
+                    <li>Inject/Attach your executor into the Roblox client game.</li>
+                    <li>Press <strong>Execute</strong> and enjoy the GUI dashboard in-game!</li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
 
     <script>
-        function copyScript() {
-            const scriptText = document.getElementById('scriptText').innerText;
-            navigator.clipboard.writeText(scriptText).then(() => {
-                const copyBtn = document.querySelector('.btn-copy');
-                copyBtn.innerText = 'Copied!';
-                copyBtn.style.backgroundColor = '#ffffff';
-                copyBtn.style.color = '#000000';
+        // Funktion zum Wechseln des aktiven Menüpunkts in der Sidebar beim Klicken
+        function setActive(element) {
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Kopierfunktion mit visuellem Feedback direkt auf dem gedrückten Button
+        function copyToClipboard(button, textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'Copied!';
+                button.style.backgroundColor = '#ffffff';
+                button.style.color = '#000000';
                 
                 setTimeout(() => {
-                    copyBtn.innerText = 'Copy Script';
-                    copyBtn.style.backgroundColor = 'var(--accent-color)';
-                    copyBtn.style.color = '#ffffff';
+                    button.innerText = originalText;
+                    button.style.backgroundColor = 'var(--accent-red)';
+                    button.style.color = '#ffffff';
                 }, 2000);
             }).catch(err => {
-                alert('Failed to copy: ', err);
+                console.error('Error copying text: ', err);
             });
         }
     </script>
