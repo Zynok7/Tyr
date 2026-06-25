@@ -20,7 +20,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            scroll-behavior: smooth;
         }
 
         body {
@@ -31,60 +30,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: 40px 20px;
-        }
-
-        /* Navbar / Header Navigation */
-        .navbar {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            background: rgba(22, 7, 7, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-red);
-            border-radius: 12px;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent-red);
-            text-shadow: 0 0 10px rgba(255, 34, 34, 0.4);
-        }
-
-        .nav-menu a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent-red);
+            justify-content: center;
+            padding: 20px;
         }
 
         /* Main Container */
         .wrapper {
             width: 100%;
-            max-width: 800px;
+            max-width: 650px;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
 
-        /* Showcase / Jumbotron Box */
+        /* Main Box */
         .hero {
             background: linear-gradient(145deg, #1f0a0a, #110404);
             border: 1px solid var(--border-red);
@@ -103,6 +62,7 @@
 
         .hero h1 span {
             color: var(--accent-red);
+            text-shadow: 0 0 10px rgba(255, 34, 34, 0.4);
         }
 
         .hero p {
@@ -111,14 +71,13 @@
             margin-bottom: 30px;
         }
 
-        /* Interactive Script Area */
+        /* Script Area */
         .script-box {
             background-color: #080101;
             border: 1px solid var(--border-red);
             border-radius: 10px;
             padding: 20px;
-            margin: 0 auto;
-            max-width: 650px;
+            margin-bottom: 20px;
         }
 
         code {
@@ -130,7 +89,7 @@
             font-size: 0.95rem;
             text-align: left;
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 15px;
             background: #110303;
             border-radius: 6px;
             border-left: 3px solid var(--accent-red);
@@ -168,7 +127,6 @@
         .btn-discord {
             background-color: #5865F2;
             color: white;
-            margin-top: 15px;
         }
 
         .btn-discord:hover {
@@ -176,73 +134,22 @@
             transform: translateY(-2px);
         }
 
-        /* Features Section (Anklicken zum Scrollen) */
-        .section-features {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-red);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .section-features h2 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border-red);
-            padding-bottom: 10px;
-            color: var(--accent-red);
-        }
-
-        .feature-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-item {
-            background: #0d0303;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-red);
-        }
-
-        .feature-item strong {
-            display: block;
-            color: white;
-            margin-bottom: 5px;
-        }
-
-        .feature-item p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 0.85rem;
             color: var(--text-muted);
-            opacity: 0.6;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="logo">TYR <span>Scripts</span></div>
-        <div class="nav-menu">
-            <a href="#script">Get Script</a>
-            <a href="#features">Features</a>
-            <a href="https://discord.gg/tyrscripts" target="_blank">Discord</a>
-        </div>
-    </div>
-
     <div class="wrapper">
         
-        <div id="script" class="hero">
-            <h1>Farming & Friends <span>Premium</span></h1>
-            <p>Execute the official loader below to instantly access premium farming features.</p>
+        <div class="hero">
+            <h1>TYR <span>Scripts</span></h1>
+            <p>Farming and Friends Script</p>
             
             <div class="script-box">
                 <code id="rawScript">loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua"))()</code>
@@ -254,30 +161,8 @@
             </a>
         </div>
 
-        <div id="features" class="section-features">
-            <h2>Script Features</h2>
-            <div class="feature-list">
-                <div class="feature-item">
-                    <strong>🌾 Auto Farm</strong>
-                    <p>Automatically plants, waters, and harvests your fields at maximum speed.</p>
-                </div>
-                <div class="feature-item">
-                    <strong>🚜 Vehicle Mods</strong>
-                    <p>Modify tractor speed and acceleration mechanics instantly.</p>
-                </div>
-                <div class="feature-item">
-                    <strong>💰 Auto Sell</strong>
-                    <p>Sells your entire inventory automatically once full to bypass limits.</p>
-                </div>
-                <div class="feature-item">
-                    <strong>🛡️ Anti-Ban Protections</strong>
-                    <p>Secured via Luarmor loading systems for premium safety.</p>
-                </div>
-            </div>
-        </div>
-
         <div class="footer">
-            &copy; 2026 TYR Scripts. Designed for Farming and Friends. All rights reserved.
+            &copy; 2026 TYR Scripts. All rights reserved.
         </div>
     </div>
 
@@ -286,7 +171,7 @@
             const codeText = document.getElementById('rawScript').innerText;
             navigator.clipboard.writeText(codeText).then(() => {
                 const button = document.querySelector('.btn-copy');
-                button.innerText = 'Copied Successfully!';
+                button.innerText = 'Copied!';
                 button.style.backgroundColor = '#ffffff';
                 button.style.color = '#000000';
                 
