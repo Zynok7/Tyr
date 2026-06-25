@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYR Scripts | Farming and Friends</title>
+    <style>
+        :root {
+            --bg-color: #0d0202;
+            --container-bg: #1a0808;
+            --accent-color: #ff3333;
+            --text-color: #ffffff;
+            --text-muted: #e0a3a3;
+            --button-hover: #cc0000;
+            --border-color: #3d1414;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle, #2a0808 0%, #0d0202 100%);
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 span {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .script-box {
+            background-color: #090202;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        code {
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: var(--accent-color);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            text-align: left;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .btn-copy {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(255, 51, 51, 0.4);
+        }
+
+        .btn-copy:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.6);
+        }
+
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>TYR <span>Scripts</span></h1>
+        <p class="subtitle">Roblox Farming and Friends Script</p>
+
+        <div class="script-box">
+            <code id="scriptText">loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua"))()</code>
+            <button class="btn btn-copy" onclick="copyScript()">Copy Script</button>
+        </div>
+
+        <a href="https://discord.gg/tyrscripts" target="_blank" class="btn btn-discord">
+            Join Our Discord
+        </a>
+
+        <div class="footer">
+            &copy; 2026 TYR Scripts. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        function copyScript() {
+            const scriptText = document.getElementById('scriptText').innerText;
+            navigator.clipboard.writeText(scriptText).then(() => {
+                const copyBtn = document.querySelector('.btn-copy');
+                copyBtn.innerText = 'Copied!';
+                copyBtn.style.backgroundColor = '#ffffff';
+                copyBtn.style.color = '#000000';
+                
+                setTimeout(() => {
+                    copyBtn.innerText = 'Copy Script';
+                    copyBtn.style.backgroundColor = 'var(--accent-color)';
+                    copyBtn.style.color = '#ffffff';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy: ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
