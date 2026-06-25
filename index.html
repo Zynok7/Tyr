@@ -3,57 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYR Scripts | Hub</title>
+    <title>TYR Scripts | Farming & Friends</title>
     <style>
         :root {
-            --bg-main: #0a0505;
-            --bg-card: #140a0a;
-            --bg-sidebar: #0f0707;
+            --bg-main: #0d0202;
+            --bg-card: #160707;
             --accent-red: #ff2222;
             --accent-hover: #cc1111;
             --text-main: #ffffff;
-            --text-muted: #a89292;
-            --border-red: #2d1212;
+            --text-muted: #bc9f9f;
+            --border-red: #361414;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            display: flex;
+            background-image: radial-gradient(circle at center, #2d0b0b 0%, #0d0202 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 260px;
-            background-color: var(--bg-sidebar);
-            border-right: 1px solid var(--border-red);
             display: flex;
             flex-direction: column;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            padding: 30px 20px;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+        }
+
+        /* Navbar / Header Navigation */
+        .navbar {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: rgba(22, 7, 7, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-red);
+            border-radius: 12px;
+            margin-bottom: 40px;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            text-align: center;
+            letter-spacing: 1px;
         }
 
         .logo span {
@@ -61,284 +62,241 @@
             text-shadow: 0 0 10px rgba(255, 34, 34, 0.4);
         }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-links a {
+        .nav-menu a {
             color: var(--text-muted);
             text-decoration: none;
-            padding: 14px 18px;
-            border-radius: 8px;
+            margin-left: 20px;
             font-weight: 600;
-            transition: all 0.2s ease;
-            display: block;
-            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text-main);
-            background-color: rgba(255, 34, 34, 0.08);
-            border-left-color: var(--accent-red);
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-        }
-
-        .btn-discord {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #5865F2;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-
-        .btn-discord:hover {
-            background-color: #4752C4;
-        }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            margin-left: 260px;
-            padding: 40px 60px;
-            width: calc(100% - 260px);
-        }
-
-        .header-banner {
-            background: linear-gradient(135deg, #2a0a0a 0%, #140505 100%);
-            border: 1px solid var(--border-red);
-            border-radius: 16px;
-            padding: 50px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .header-banner h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .header-banner h2 span {
+        .nav-menu a:hover {
             color: var(--accent-red);
         }
 
-        .header-banner p {
-            color: var(--text-muted);
-            max-width: 500px;
-            font-size: 1.1rem;
-        }
-
-        /* --- SECTIONS --- */
-        section {
-            padding-top: 20px;
-            margin-bottom: 60px;
-        }
-
-        section h3 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border-red);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        /* GRID FOR CARDS */
-        .script-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-red);
-            border-radius: 12px;
-            padding: 25px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        /* Main Container */
+        .wrapper {
+            width: 100%;
+            max-width: 800px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 30px;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-red);
-            box-shadow: 0 5px 20px rgba(255, 34, 34, 0.1);
+        /* Showcase / Jumbotron Box */
+        .hero {
+            background: linear-gradient(145deg, #1f0a0a, #110404);
+            border: 1px solid var(--border-red);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .card h4 {
-            font-size: 1.3rem;
+        .hero h1 {
+            font-size: 2.4rem;
+            text-transform: uppercase;
             margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        .card p {
+        .hero h1 span {
+            color: var(--accent-red);
+        }
+
+        .hero p {
             color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Interactive Script Area */
+        .script-box {
+            background-color: #080101;
+            border: 1px solid var(--border-red);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 650px;
+        }
+
+        code {
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #ff5555;
+            font-family: 'Courier New', monospace;
             font-size: 0.95rem;
+            text-align: left;
             margin-bottom: 20px;
-            line-height: 1.4;
+            padding: 10px;
+            background: #110303;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-red);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            width: 100%;
         }
 
         .btn-copy {
             background-color: var(--accent-red);
             color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            transition: background 0.2s;
-            width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 34, 34, 0.3);
         }
 
         .btn-copy:hover {
             background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 34, 34, 0.5);
         }
 
-        /* --- FEATURES / INFO PANEL --- */
-        .info-panel {
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+            margin-top: 15px;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+        }
+
+        /* Features Section (Anklicken zum Scrollen) */
+        .section-features {
             background-color: var(--bg-card);
             border: 1px solid var(--border-red);
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 40px;
         }
 
-        .info-panel ol {
-            margin-left: 20px;
+        .section-features h2 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-red);
+            padding-bottom: 10px;
+            color: var(--accent-red);
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            background: #0d0303;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .feature-item strong {
+            display: block;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.8;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-red); }
-            .main-content { margin-left: 0; width: 100%; padding: 20px; }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
+    <div class="navbar">
         <div class="logo">TYR <span>Scripts</span></div>
-        <ul class="nav-links">
-            <li><a href="#home" class="active" onclick="setActive(this)">Home</a></li>
-            <li><a href="#farming" onclick="setActive(this)">Farming Games</a></li>
-            <li><a href="#other" onclick="setActive(this)">Other Scripts</a></li>
-            <li><a href="#how-to" onclick="setActive(this)">How to Use</a></li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="https://discord.gg/tyrscripts" target="_blank" class="btn-discord">Join Discord</a>
+        <div class="nav-menu">
+            <a href="#script">Get Script</a>
+            <a href="#features">Features</a>
+            <a href="https://discord.gg/tyrscripts" target="_blank">Discord</a>
         </div>
-    </nav>
+    </div>
 
-    <main class="main-content">
+    <div class="wrapper">
         
-        <header id="home" class="header-banner">
-            <h2>Welcome to <span>TYR Hub</span></h2>
-            <p>The ultimate destination for optimized, safe, and powerful Roblox scripts. Click the buttons below to copy scripts instantly.</p>
-        </header>
-
-        <section id="farming">
-            <h3>Farming Games</h3>
-            <div class="script-grid">
-                
-                <div class="card">
-                    <div>
-                        <h4>Farming and Friends</h4>
-                        <p>Auto-farm, fast harvest, speed-up machines, and infinite item management features.</p>
-                    </div>
-                    <button class="btn-copy" onclick="copyToClipboard(this, 'loadstring(game:HttpGet(\'https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua\'))()')">Copy Script</button>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <h4>Bee Swarm Simulator</h4>
-                        <p>Auto-dig, auto-quest completion, and advanced token collection filters.</p>
-                    </div>
-                    <button class="btn-copy" onclick="copyToClipboard(this, '-- Bee Swarm Script coming soon in Discord! --')">Get From Discord</button>
-                </div>
-
+        <div id="script" class="hero">
+            <h1>Farming & Friends <span>Premium</span></h1>
+            <p>Execute the official loader below to instantly access premium farming features.</p>
+            
+            <div class="script-box">
+                <code id="rawScript">loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/51f2550d27b3bdbbb34a8b3adf74e0e6.lua"))()</code>
+                <button class="btn btn-copy" onclick="copyScript()">Copy Script</button>
             </div>
-        </section>
 
-        <section id="other">
-            <h3>Other Scripts</h3>
-            <div class="script-grid">
-                
-                <div class="card">
-                    <div>
-                        <h4>Universal ESP & Aimbot</h4>
-                        <p>Works on almost any shooter game. Custom crosshair, hitbox expander, and wallhacks.</p>
-                    </div>
-                    <button class="btn-copy" onclick="copyToClipboard(this, '-- Universal Script Locked. Check Discord --')">Locked</button>
+            <a href="https://discord.gg/tyrscripts" target="_blank" class="btn btn-discord">
+                Join our Discord Server
+            </a>
+        </div>
+
+        <div id="features" class="section-features">
+            <h2>Script Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>🌾 Auto Farm</strong>
+                    <p>Automatically plants, waters, and harvests your fields at maximum speed.</p>
                 </div>
-
-                <div class="card">
-                    <div>
-                        <h4>Pet Simulator 99</h4>
-                        <p>Automatic area unlocking, auto-clicker, and instant coin magnet built-in.</p>
-                    </div>
-                    <button class="btn-copy" onclick="copyToClipboard(this, '-- PS99 Script coming soon! --')">Soon</button>
+                <div class="feature-item">
+                    <strong>🚜 Vehicle Mods</strong>
+                    <p>Modify tractor speed and acceleration mechanics instantly.</p>
                 </div>
-
+                <div class="feature-item">
+                    <strong>💰 Auto Sell</strong>
+                    <p>Sells your entire inventory automatically once full to bypass limits.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>🛡️ Anti-Ban Protections</strong>
+                    <p>Secured via Luarmor loading systems for premium safety.</p>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <section id="how-to">
-            <h3>How to Use</h3>
-            <div class="info-panel">
-                <ol>
-                    <li>Click the <strong>"Copy Script"</strong> button on any script card above.</li>
-                    <li>Open your preferred Roblox Executor (e.g., Wave, Synapse, Electron, Solara).</li>
-                    <li>Paste (<kbd>Ctrl</kbd> + <kbd>V</kbd>) the script into the executor code box.</li>
-                    <li>Inject/Attach your executor into the Roblox client game.</li>
-                    <li>Press <strong>Execute</strong> and enjoy the GUI dashboard in-game!</li>
-                </ol>
-            </div>
-        </section>
-
-    </main>
+        <div class="footer">
+            &copy; 2026 TYR Scripts. Designed for Farming and Friends. All rights reserved.
+        </div>
+    </div>
 
     <script>
-        // Funktion zum Wechseln des aktiven Menüpunkts in der Sidebar beim Klicken
-        function setActive(element) {
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => link.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // Kopierfunktion mit visuellem Feedback direkt auf dem gedrückten Button
-        function copyToClipboard(button, textToCopy) {
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const originalText = button.innerText;
-                button.innerText = 'Copied!';
+        function copyScript() {
+            const codeText = document.getElementById('rawScript').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const button = document.querySelector('.btn-copy');
+                button.innerText = 'Copied Successfully!';
                 button.style.backgroundColor = '#ffffff';
                 button.style.color = '#000000';
                 
                 setTimeout(() => {
-                    button.innerText = originalText;
+                    button.innerText = 'Copy Script';
                     button.style.backgroundColor = 'var(--accent-red)';
                     button.style.color = '#ffffff';
                 }, 2000);
             }).catch(err => {
-                console.error('Error copying text: ', err);
+                console.error('Could not copy text: ', err);
             });
         }
     </script>
